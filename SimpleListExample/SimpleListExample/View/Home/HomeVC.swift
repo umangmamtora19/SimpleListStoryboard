@@ -14,16 +14,15 @@ class HomeVC: UIViewController {
     @IBOutlet weak var tblPeople: UITableView!
     @IBOutlet weak var segPeople: UISegmentedControl!
     
-    
     let homeVM = HomeViewModel()
+    
     private var cancellable: AnyCancellable?
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cancellable = homeVM.objectWillChange.sink { _ in
             DispatchQueue.main.async {
-                self.tblPeople.reloadData()
+                self.tblPeople.reloadWithAnimation()
             }
         }
         homeVM.getPeoples()
@@ -35,7 +34,7 @@ class HomeVC: UIViewController {
         } else if homeVM.roomList.isEmpty {
             homeVM.getRoomAvailability()
         }
-        tblPeople.reloadData()
+        self.tblPeople.reloadWithAnimation()
     }
 }
 
@@ -48,7 +47,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         if segPeople.selectedSegmentIndex == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleTVC") as? PeopleTVC else { return UITableViewCell() }
             let cellItem = homeVM.peopleList[indexPath.row]
-            cell.imgProfile.sd_setImage(with: URL(string: cellItem.avatar))
+            cell.imgProfile.sd_setImage(with: URL(string: cellItem.avatar ?? ""))
             cell.lblName.text = "\(cellItem.firstName ?? "") \(cellItem.lastName ?? "")"
             cell.lblEmail.text = cellItem.email
             return cell
@@ -58,7 +57,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             cell.lblCreatedAt.text = ""
             cell.lblRoomID.text = "\(cellItem.id ?? "")"
             cell.lblMaxOccupancy.text = "\(cellItem.maxOccupancy ?? 0)"
-            cell.backgroundColor = cellItem.isOccupied ? UIColor.red.withAlphaComponent(0.1) : UIColor.white
+            cell.backgroundColor = cellItem.isOccupied ?? false ? UIColor.red.withAlphaComponent(0.1) : UIColor.white
             return cell
         }
     }

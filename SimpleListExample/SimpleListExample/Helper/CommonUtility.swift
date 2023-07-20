@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class CommonUtility {
     static let shared = CommonUtility()
@@ -21,10 +22,14 @@ class CommonUtility {
         }
     }
     
-     func hideLoadingIndicator() {
+    func hideLoadingIndicator() {
         DispatchQueue.main.async {
             self.indicator.stopAnimating()
         }
+    }
+    
+    func showToast(_ message: String) {
+        scenedelegate?.window?.rootViewController?.view.makeToast(message)
     }
 
 }

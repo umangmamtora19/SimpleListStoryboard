@@ -23,6 +23,10 @@
 		73713D412A4C9C490053981E /* RoomTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73713D402A4C9C490053981E /* RoomTVC.swift */; };
 		73713D442A4CA12A0053981E /* PersonDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73713D432A4CA12A0053981E /* PersonDetailVC.swift */; };
 		73713D462A4CA4240053981E /* CommonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73713D452A4CA4240053981E /* CommonUtility.swift */; };
+		738B8F562A684FD2003D59FC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B8F552A684FD2003D59FC /* NetworkManager.swift */; };
+		738B8F582A684FD8003D59FC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B8F572A684FD7003D59FC /* NetworkMonitor.swift */; };
+		738B8F5B2A685178003D59FC /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B8F5A2A685178003D59FC /* HomeService.swift */; };
+		738B8F5E2A68542A003D59FC /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 738B8F5D2A68542A003D59FC /* Toast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +47,9 @@
 		73713D402A4C9C490053981E /* RoomTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTVC.swift; sourceTree = "<group>"; };
 		73713D432A4CA12A0053981E /* PersonDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailVC.swift; sourceTree = "<group>"; };
 		73713D452A4CA4240053981E /* CommonUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtility.swift; sourceTree = "<group>"; };
+		738B8F552A684FD2003D59FC /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		738B8F572A684FD7003D59FC /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		738B8F5A2A685178003D59FC /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				738B8F5E2A68542A003D59FC /* Toast in Frameworks */,
 				73713D3F2A4C982C0053981E /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +86,7 @@
 			children = (
 				73713D152A4C91CC0053981E /* AppDelegate.swift */,
 				73713D172A4C91CC0053981E /* SceneDelegate.swift */,
+				738B8F592A685162003D59FC /* Services */,
 				73713D362A4C979E0053981E /* Model */,
 				73713D332A4C975D0053981E /* ViewModel */,
 				73713D302A4C97030053981E /* View */,
@@ -94,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				73713D2C2A4C95DB0053981E /* Constant.swift */,
+				738B8F572A684FD7003D59FC /* NetworkMonitor.swift */,
+				738B8F552A684FD2003D59FC /* NetworkManager.swift */,
 				73713D2D2A4C95DB0053981E /* Extension.swift */,
 				73713D452A4CA4240053981E /* CommonUtility.swift */,
 			);
@@ -168,6 +179,14 @@
 			path = PersonDetail;
 			sourceTree = "<group>";
 		};
+		738B8F592A685162003D59FC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				738B8F5A2A685178003D59FC /* HomeService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,6 +205,7 @@
 			name = SimpleListExample;
 			packageProductDependencies = (
 				73713D3E2A4C982C0053981E /* SDWebImage */,
+				738B8F5D2A68542A003D59FC /* Toast */,
 			);
 			productName = SimpleListExample;
 			productReference = 73713D122A4C91CC0053981E /* SimpleListExample.app */;
@@ -217,6 +237,7 @@
 			mainGroup = 73713D092A4C91CC0053981E;
 			packageReferences = (
 				73713D3D2A4C982C0053981E /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				738B8F5C2A68542A003D59FC /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 73713D132A4C91CC0053981E /* Products */;
 			projectDirPath = "";
@@ -248,15 +269,18 @@
 				73713D442A4CA12A0053981E /* PersonDetailVC.swift in Sources */,
 				73713D412A4C9C490053981E /* RoomTVC.swift in Sources */,
 				73713D2A2A4C94E70053981E /* PeopleTVC.swift in Sources */,
+				738B8F562A684FD2003D59FC /* NetworkManager.swift in Sources */,
 				73713D462A4CA4240053981E /* CommonUtility.swift in Sources */,
 				73713D1A2A4C91CC0053981E /* HomeVC.swift in Sources */,
 				73713D3B2A4C979E0053981E /* Room.swift in Sources */,
 				73713D352A4C97690053981E /* HomeViewModel.swift in Sources */,
 				73713D3C2A4C979E0053981E /* People.swift in Sources */,
+				738B8F5B2A685178003D59FC /* HomeService.swift in Sources */,
 				73713D2E2A4C95DB0053981E /* Constant.swift in Sources */,
 				73713D2F2A4C95DB0053981E /* Extension.swift in Sources */,
 				73713D162A4C91CC0053981E /* AppDelegate.swift in Sources */,
 				73713D182A4C91CC0053981E /* SceneDelegate.swift in Sources */,
+				738B8F582A684FD8003D59FC /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +508,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		738B8F5C2A68542A003D59FC /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -491,6 +523,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73713D3D2A4C982C0053981E /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		738B8F5D2A68542A003D59FC /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 738B8F5C2A68542A003D59FC /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

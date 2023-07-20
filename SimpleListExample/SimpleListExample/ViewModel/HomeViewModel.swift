@@ -8,61 +8,46 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-    @Published var selection = 0
     
+    @Published var selection = 0
     @Published var peopleList = [People]()
     @Published var roomList = [Room]()
     
+    let homeViewService: HomeViewService
+    
+    init(homeViewService: HomeViewService = HomeViewService()) {
+        self.homeViewService = homeViewService
+    }
+    
     func getPeoples() {
-        var request = URLRequest(url: URL(string: baseURL + Endpoint.people.rawValue)!)
-        request.httpMethod = "GET"
-        
         CommonUtility.shared.showLoadingIndicator()
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        homeViewService.getPeoplesData(method: .get) { [weak self] result in
+            guard let `self` = self else { return }
+            CommonUtility.shared.hideLoadingIndicator()
             DispatchQueue.main.async {
-                if let data = data {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] ?? []
-                        appPrint(json)
-                        json.forEach { dic in
-                            self.peopleList.append(People(fromDictionary: dic))
-                        }
-                        CommonUtility.shared.hideLoadingIndicator()
-                    } catch (let decodingError) {
-                        CommonUtility.shared.hideLoadingIndicator()
-                        appPrint(decodingError.localizedDescription)
-                    }
-                } else {
-                    CommonUtility.shared.hideLoadingIndicator()
-                    appPrint(error?.localizedDescription ?? "")
+                switch result {
+                case .success(let response):
+                    self.peopleList.append(contentsOf: response)
+                case .failure(let failure):
+                    appPrint(failure.localizedDescription)
                 }
             }
-        }.resume()
+        }
     }
     
     func getRoomAvailability() {
-        var request = URLRequest(url: URL(string: baseURL + Endpoint.rooms.rawValue)!)
-        request.httpMethod = "GET"
-        
         CommonUtility.shared.showLoadingIndicator()
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        homeViewService.getRoomData(method: .get) { [weak self] result in
+            guard let `self` = self else { return }
+            CommonUtility.shared.hideLoadingIndicator()
             DispatchQueue.main.async {
-                if let data = data {
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] ?? []
-                        json.forEach { dic in
-                            self.roomList.append(Room(fromDictionary: dic))
-                        }
-                        CommonUtility.shared.hideLoadingIndicator()
-                    } catch (let decodingError) {
-                        CommonUtility.shared.hideLoadingIndicator()
-                        appPrint(decodingError.localizedDescription)
-                    }
-                } else {
-                    CommonUtility.shared.hideLoadingIndicator()
-                    appPrint(error?.localizedDescription ?? "")
+                switch result {
+                case .success(let response):
+                    self.roomList.append(contentsOf: response)
+                case .failure(let failure):
+                    appPrint(failure.localizedDescription)
                 }
             }
-        }.resume()
+        }
     }
 }

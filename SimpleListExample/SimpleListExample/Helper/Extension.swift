@@ -31,3 +31,9 @@ extension UIView {
     }
 }
  
+extension UITableView {
+    func reloadWithAnimation() {
+        UIView.transition(with: self, duration: 0.35, options: .transitionCrossDissolve, animations: { self.reloadData()
+        })
+    }
+}

@@ -27,6 +27,7 @@
 		738B8F582A684FD8003D59FC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B8F572A684FD7003D59FC /* NetworkMonitor.swift */; };
 		738B8F5B2A685178003D59FC /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B8F5A2A685178003D59FC /* HomeService.swift */; };
 		738B8F5E2A68542A003D59FC /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 738B8F5D2A68542A003D59FC /* Toast */; };
+		73D6A5892A6AF45900ACA119 /* PersonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D6A5882A6AF45900ACA119 /* PersonDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		738B8F552A684FD2003D59FC /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		738B8F572A684FD7003D59FC /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		738B8F5A2A685178003D59FC /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		73D6A5882A6AF45900ACA119 /* PersonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				73713D342A4C97690053981E /* HomeViewModel.swift */,
+				73D6A5882A6AF45900ACA119 /* PersonDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				738B8F5B2A685178003D59FC /* HomeService.swift in Sources */,
 				73713D2E2A4C95DB0053981E /* Constant.swift in Sources */,
 				73713D2F2A4C95DB0053981E /* Extension.swift in Sources */,
+				73D6A5892A6AF45900ACA119 /* PersonDetailViewModel.swift in Sources */,
 				73713D162A4C91CC0053981E /* AppDelegate.swift in Sources */,
 				73713D182A4C91CC0053981E /* SceneDelegate.swift in Sources */,
 				738B8F582A684FD8003D59FC /* NetworkMonitor.swift in Sources */,

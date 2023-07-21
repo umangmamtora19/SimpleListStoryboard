@@ -9,16 +9,21 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
+    //    MARK: - VARIABLES
     @Published var selection = 0
     @Published var peopleList = [People]()
     @Published var roomList = [Room]()
     
     let homeViewService: HomeViewService
     
+    //    MARK: - INITIALIZER
     init(homeViewService: HomeViewService = HomeViewService()) {
         self.homeViewService = homeViewService
     }
     
+    //    MARK: - USER DEFIEND METHODS
+    
+    //    This method is used to fetch people list from api.
     func getPeoples() {
         CommonUtility.shared.showLoadingIndicator()
         homeViewService.getPeoplesData(method: .get) { [weak self] result in
@@ -35,6 +40,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    //    This method is used to fetch room list from api
     func getRoomAvailability() {
         CommonUtility.shared.showLoadingIndicator()
         homeViewService.getRoomData(method: .get) { [weak self] result in

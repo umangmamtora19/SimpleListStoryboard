@@ -1,6 +1,5 @@
 //
 //  Extension.swift
-//  Practical
 //
 //  Created by Umang on 23/06/23.
 //

@@ -11,13 +11,15 @@ import Combine
 
 class HomeVC: UIViewController {
     
+//    MARK: - OUTLETS
     @IBOutlet weak var tblPeople: UITableView!
     @IBOutlet weak var segPeople: UISegmentedControl!
     
+//    MARK: - VARIABLES
     let homeVM = HomeViewModel()
-    
     private var cancellable: AnyCancellable?
     
+//    MARK: - VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         cancellable = homeVM.objectWillChange.sink { _ in
@@ -28,6 +30,7 @@ class HomeVC: UIViewController {
         homeVM.getPeoples()
     }
     
+//    MARK: - EVENTS
     @IBAction func segValueChange(_ sender: UISegmentedControl) {
         if segPeople.selectedSegmentIndex == 0 && homeVM.peopleList.isEmpty {
             homeVM.getPeoples()
@@ -38,6 +41,7 @@ class HomeVC: UIViewController {
     }
 }
 
+//    MARK: - TABLEVIEW DATASOURCE AND DELEGATE METHODS
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return segPeople.selectedSegmentIndex == 0 ? homeVM.peopleList.count : homeVM.roomList.count
@@ -65,7 +69,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segPeople.selectedSegmentIndex == 0 {
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "PersonDetailVC") as? PersonDetailVC else { return }
-            vc.person = homeVM.peopleList[indexPath.row]
+            vc.personVM.person = homeVM.peopleList[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
     }

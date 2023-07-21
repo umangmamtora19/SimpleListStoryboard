@@ -9,24 +9,26 @@ import UIKit
 
 class PersonDetailVC: UIViewController {
 
+    //    MARK: - OUTLETS
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var lblFavColor: UILabel!
     @IBOutlet weak var lblJobTitle: UILabel!
     @IBOutlet weak var imgProfile: UIImageView!
     
-    var person: People?
+    //    MARK: - VARIABLES
+    var personVM: PersonDetailViewModel = PersonDetailViewModel()
+
+    //    MARK: - VIEW LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Person Details"
-
         imgProfile.setCircularCorner()
-        imgProfile.sd_setImage(with: URL(string: person?.avatar ?? ""))
-        lblName.text = "\(person?.firstName ?? "") \(person?.lastName ?? "")"
-        lblEmail.text = person?.email ?? ""
-        lblJobTitle.text = person?.jobtitle ?? ""
-        lblFavColor.text = person?.favouriteColor ?? ""
+        imgProfile.sd_setImage(with: URL(string: personVM.person?.avatar ?? ""))
+        lblName.text = "\(personVM.person?.firstName ?? "") \(personVM.person?.lastName ?? "")"
+        lblEmail.text = personVM.person?.email ?? ""
+        lblJobTitle.text = personVM.person?.jobtitle ?? ""
+        lblFavColor.text = personVM.person?.favouriteColor ?? ""
     }
 
 }

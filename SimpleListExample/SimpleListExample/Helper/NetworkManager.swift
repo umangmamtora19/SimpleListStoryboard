@@ -1,8 +1,6 @@
 //
 //  NetworkManager.swift
-//  ApiCallSwiftUI
 //
-//  Created by Nilesh on 15/01/22.
 //
 
 import Foundation
@@ -49,6 +47,15 @@ class NetworkManager {
         self.responseHandler = responseHandler
     }
     
+    /// This method is used for calling api and getting response model.
+    ///
+    /// - Parameters:
+    ///   - method: This could be any HTTP request method.
+    ///   - endpoint: This is ecompletionndpoint of api.
+    ///   - params: This are the query perameters of an api.
+    ///   - type: This is generic type which can be model object of api response.
+    ///   - completion: Here we get result type. If it is success then we will get response model otherwise will ger error.
+    ///
     func fetchRequest<T: Codable>(method: HTTPMethod, endpoint: Endpoint, params: [String: Any], type: T.Type, completion: @escaping(Result<T, APIError>) -> Void) {
         guard let url = URL(string: self.baseURL.appending(endpoint.rawValue)) else {
             completion(.failure(.BadURL))
@@ -137,11 +144,13 @@ protocol ResponseHandlerDelegate {
 }
 
 class ResponseHandler: ResponseHandlerDelegate {
+    
+    //    This method covert json response to Generic type, if decoding is success then return generic type otherwise return error
     func fetchModel<T: Codable>(type: T.Type, data: Data, completion: (Result<T, APIError>) -> Void) {
         let aResponse = try? JSONDecoder().decode(type.self, from: data)
         appPrint("========================================= RESPONSE =========================================")
         let json = try? JSONSerialization.jsonObject(with: data)
-        appPrint(json)
+        //        appPrint(json)
         if let myResponse = aResponse {
             return completion(.success(myResponse))
         } else {

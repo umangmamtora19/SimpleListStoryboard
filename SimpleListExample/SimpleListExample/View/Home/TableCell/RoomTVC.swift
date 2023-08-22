@@ -9,6 +9,7 @@ import UIKit
 
 class RoomTVC: UITableViewCell {
     
+//    MARK: - OUTLETS
     @IBOutlet weak var lblCreatedAt: UILabel!
     @IBOutlet weak var lblRoomID: UILabel!
     @IBOutlet weak var lblMaxOccupancy: UILabel!

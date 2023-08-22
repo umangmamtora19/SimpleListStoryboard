@@ -5,6 +5,7 @@
 
 import Foundation
 
+//  This are the common errors while working with api, will return this enum in api error response
 enum APIError: Error {
     case BadURL
     case NoData
@@ -18,16 +19,17 @@ enum APIError: Error {
     case InternalServerError
 }
 
+//  This enum is used for the api endpoints
 enum Endpoint: String {
     case people = "people"
     case rooms = "rooms"
 }
 
-
+//  This structure is used for http methods
 struct HTTPMethod: RawRepresentable, Equatable, Hashable {
     static let get = HTTPMethod(rawValue: "GET")
     static let post = HTTPMethod(rawValue: "POST")
-    
+
     let rawValue: String
     public init(rawValue: String) {
         self.rawValue = rawValue
@@ -80,11 +82,13 @@ class NetworkManager {
     }
 }
 
+//  This protocol having method to request for api
 protocol APIHandlerDelegate {
     func requestData(method: HTTPMethod, url: URL, params: [String: Any], completion: @escaping(Result<Data, APIError>) -> Void)
 }
 
 class APIHandler: APIHandlerDelegate {
+    //  This method will request for the data, if get the data in api response then return in completion otherwise will return error in completion
     func requestData(method: HTTPMethod, url: URL, params: [String : Any], completion: @escaping (Result<Data, APIError>) -> Void) {
         var components = URLComponents(string: url.absoluteString)!
         var request = URLRequest(url: components.url!)
@@ -139,10 +143,11 @@ class APIHandler: APIHandlerDelegate {
     
 }
 
+//  This protocol having method to convert response to generic type
 protocol ResponseHandlerDelegate {
     func fetchModel<T: Codable>(type: T.Type, data: Data, completion: (Result<T, APIError>) -> Void)
 }
-
+ 
 class ResponseHandler: ResponseHandlerDelegate {
     
     //    This method covert json response to Generic type, if decoding is success then return generic type otherwise return error

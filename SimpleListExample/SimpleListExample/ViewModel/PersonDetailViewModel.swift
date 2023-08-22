@@ -8,5 +8,8 @@
 import Foundation
 
 class PersonDetailViewModel {
+
+//    MARK: - VARIABLES
+    
     var person: People?
 }

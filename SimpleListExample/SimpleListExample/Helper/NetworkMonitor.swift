@@ -6,6 +6,7 @@
 import Foundation
 import Network
 
+//  This singleton class is used to monitor network connection
 class NetworkMonitor {
     static let shared = NetworkMonitor()
 
@@ -14,6 +15,7 @@ class NetworkMonitor {
     var isReachable: Bool { status == .satisfied }
     var isReachableOnCellular: Bool = true
 
+    //  We need to call this function when app start and whenever network connection changes, a variable will be updated.
     func startMonitoring() {
         monitor.pathUpdateHandler = { [weak self] path in
             self?.status = path.status

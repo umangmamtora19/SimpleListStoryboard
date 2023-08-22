@@ -9,6 +9,7 @@ import UIKit
 
 class PeopleTVC: UITableViewCell {
 
+//    MARK: - OUTLETS
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!

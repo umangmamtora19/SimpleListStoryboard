@@ -9,6 +9,7 @@ import Foundation
  
 var isConnectedToInternet = false
 
+//  This is a common function to print anything in debug, in release we can comment to print inside function
 func appPrint(_ data: Any) {
     print(data)
 }

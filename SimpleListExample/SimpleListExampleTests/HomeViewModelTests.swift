@@ -12,6 +12,7 @@ final class HomeViewModelTests: XCTestCase {
     
     let homeViewService = HomeViewService()
     
+//    This function is to check wheather the peoplelist has data or not
     func test_peoplelist_is_not_empty() {
         let expectation = expectation(description: "get peoplelist api")
         homeViewService.getPeoplesData(method: .post) { result in
@@ -27,9 +28,10 @@ final class HomeViewModelTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
     
+//    This function is to check wheather the roomlist has data or not
     func test_roomlist_is_not_empty() {
         let expectation = expectation(description: "get roomlist api")
-        homeViewService.getPeoplesData(method: .post) { result in
+        homeViewService.getRoomData(method: .post) { result in
             switch result {
             case .success(let roomlist):
                 XCTAssertNotNil(roomlist)

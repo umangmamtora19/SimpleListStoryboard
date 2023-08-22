@@ -18,14 +18,14 @@ final class HomeViewModelTests: XCTestCase {
         homeViewService.getPeoplesData(method: .post) { result in
             switch result {
             case .success(let peopleList):
-                XCTAssertNil(peopleList)
+                XCTAssertNotNil(peopleList)
                 expectation.fulfill()
             case .failure(let error):
                 XCTAssert(false, "Geting error from api error is : \(error.localizedDescription)")
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
 //    This function is to check wheather the roomlist has data or not
@@ -41,6 +41,6 @@ final class HomeViewModelTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 }

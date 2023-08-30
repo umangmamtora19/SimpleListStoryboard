@@ -13,10 +13,11 @@ class RoomTVC: UITableViewCell {
     @IBOutlet weak var lblCreatedAt: UILabel!
     @IBOutlet weak var lblRoomID: UILabel!
     @IBOutlet weak var lblMaxOccupancy: UILabel!
+    @IBOutlet weak var bgView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        bgView.setCorner(radius: 15)
     }
  
 }

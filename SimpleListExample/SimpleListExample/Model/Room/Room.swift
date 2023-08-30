@@ -4,18 +4,12 @@
 
 import Foundation
   
+//  Resolved: Removed unnecessary CodeingKey
 struct Room: Codable {
     var createdAt : String?
     var id : String?
     var isOccupied : Bool?
     var maxOccupancy : Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case createdAt = "createdAt"
-        case id = "id"
-        case isOccupied = "isOccupied"
-        case maxOccupancy = "maxOccupancy"
-    }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

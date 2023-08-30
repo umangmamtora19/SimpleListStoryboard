@@ -4,6 +4,7 @@
 
 import Foundation
   
+//  Resolved: Removed unnecessary CodeingKey
 struct People : Codable {
 
     let avatar : String?
@@ -19,23 +20,6 @@ struct People : Codable {
     let size : String?
     let to : String?
     let type : String?
-
-
-    enum CodingKeys: String, CodingKey {
-        case avatar = "avatar"
-        case createdAt = "createdAt"
-        case email = "email"
-        case favouriteColor = "favouriteColor"
-        case firstName = "firstName"
-        case fromName = "fromName"
-        case id = "id"
-        case jobtitle = "jobtitle"
-        case lastName = "lastName"
-        case name = "name"
-        case size = "size"
-        case to = "to"
-        case type = "type"
-    }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

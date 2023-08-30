@@ -16,11 +16,11 @@ protocol HomeViewDelegate {
 //  Implementing delegate methods and parsing the response in completion
 class HomeViewService: HomeViewDelegate {
     func getPeoplesData(method: HTTPMethod, completion: @escaping (Result<[People], APIError>) -> Void) {
-        NetworkManager().fetchRequest(method: .get, endpoint: .people, params: [:], type: [People].self, completion: completion)
+        NetworkManager.shared.fetchRequest(method: .get, endpoint: .people, params: [:], type: [People].self, completion: completion)
     }
     
     func getRoomData(method: HTTPMethod, completion: @escaping (Result<[Room], APIError>) -> Void) {
-        NetworkManager().fetchRequest(method: .get, endpoint: .rooms, params: [:], type: [Room].self, completion: completion)
+        NetworkManager.shared.fetchRequest(method: .get, endpoint: .rooms, params: [:], type: [Room].self, completion: completion)
     }
 }
 

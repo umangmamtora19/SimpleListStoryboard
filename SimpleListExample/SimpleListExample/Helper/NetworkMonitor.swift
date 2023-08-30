@@ -22,14 +22,14 @@ class NetworkMonitor {
             self?.isReachableOnCellular = path.isExpensive
 
             if path.status == .satisfied {
-                appPrint("We're connected!")
+                CommonUtility.shared.appPrint("We're connected!")
                 // post connected notification
             } else {
-                appPrint("No connection.")
+                CommonUtility.shared.appPrint("No connection.")
                 CommonUtility.shared.showToast("Oppps...you are not connected to internet")
                 // post disconnected notification
             }
-            appPrint("isExpensive : \(path.isExpensive)")
+            CommonUtility.shared.appPrint("isExpensive : \(path.isExpensive)")
         }
 
         let queue = DispatchQueue(label: "NetworkMonitor")

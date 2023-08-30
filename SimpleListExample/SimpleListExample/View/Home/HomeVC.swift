@@ -58,10 +58,15 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RoomTVC") as? RoomTVC else { return UITableViewCell() }
             let cellItem = homeVM.roomList[indexPath.row]
-            cell.lblCreatedAt.text = ""
+            cell.lblCreatedAt.text = cellItem.createdAt?.toDate(fromFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", toFormat: "dd-MM-yyyy hh:mm a")
             cell.lblRoomID.text = "\(cellItem.id ?? "")"
             cell.lblMaxOccupancy.text = "\(cellItem.maxOccupancy ?? 0)"
-            cell.backgroundColor = cellItem.isOccupied ?? false ? UIColor.red.withAlphaComponent(0.1) : UIColor.white
+//            Resolved: UI
+            if cellItem.isOccupied ?? false {
+                cell.bgView.setGradient(with: [UIColor.green.withAlphaComponent(0.2), UIColor.green.withAlphaComponent(0.1), .clear], locations: [0.0, 0.7, 1])
+            } else {
+                cell.bgView.setGradient(with: [UIColor.red.withAlphaComponent(0.2), UIColor.red.withAlphaComponent(0.1), .clear], locations: [0.0, 0.7, 1])
+            } 
             return cell
         }
     }

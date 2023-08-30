@@ -19,6 +19,21 @@ enum APIError: Error {
     case InternalServerError
 }
 
+enum BaseUrl: String {
+    case production, stagging, testing
+    
+    var url: String {
+        switch self {
+        case .production:
+            return "https://61e947967bc0550017bc61bf.mockapi.io/api/v1/"
+        case .stagging:
+            return "https://61e947967bc0550017bc61bf.mockapi.io/api/v1/"
+        case .testing:
+            return "https://61e947967bc0550017bc61bf.mockapi.io/api/"
+        }
+    }
+}
+
 //  This enum is used for the api endpoints
 enum Endpoint: String {
     case people = "people"
@@ -37,10 +52,11 @@ struct HTTPMethod: RawRepresentable, Equatable, Hashable {
 }
 
 class NetworkManager {
+    static let shared = NetworkManager()
     let apiHandler: APIHandlerDelegate
     let responseHandler: ResponseHandlerDelegate
     
-    private let baseURL = "https://61e947967bc0550017bc61bf.mockapi.io/api/v1/"
+    var baseURL = BaseUrl.stagging.url
     
     
     init(apiHandler: APIHandlerDelegate = APIHandler(),
@@ -90,14 +106,22 @@ protocol APIHandlerDelegate {
 class APIHandler: APIHandlerDelegate {
     //  This method will request for the data, if get the data in api response then return in completion otherwise will return error in completion
     func requestData(method: HTTPMethod, url: URL, params: [String : Any], completion: @escaping (Result<Data, APIError>) -> Void) {
-        var components = URLComponents(string: url.absoluteString)!
-        var request = URLRequest(url: components.url!)
+        // Resolved : stop using force-wrap
+        guard var components = URLComponents(string: url.absoluteString) else {
+            completion(.failure(.BadURL))
+            return
+        }
+        guard let url = components.url else {
+            completion(.failure(.BadURL))
+            return
+        }
         
-        appPrint("========================================= URL =========================================")
-        appPrint(url)
+        var request = URLRequest(url: url)
         
-        appPrint("========================================= PARAMETERS =========================================")
-        appPrint(params)
+        CommonUtility.shared.appPrint("========================================= URL =========================================")
+        CommonUtility.shared.appPrint(url)
+        CommonUtility.shared.appPrint("========================================= PARAMETERS =========================================")
+        CommonUtility.shared.appPrint(params)
         
         request.httpMethod = method.rawValue
         if method == .get {
@@ -105,7 +129,6 @@ class APIHandler: APIHandlerDelegate {
                 URLQueryItem(name: key, value: "\(value)")
             }
             components.percentEncodedQuery = components.percentEncodedQuery
-            
         } else if method == .post {
             let bodyData = try? JSONSerialization.data(withJSONObject: params, options: [])
             request.httpBody = bodyData
@@ -117,21 +140,21 @@ class APIHandler: APIHandlerDelegate {
                     switch res.statusCode {
                     case 400:
                         completion(.failure(.BadRequest))
-                        appPrint("Bad Request")
+                        CommonUtility.shared.appPrint("Bad Request")
                     case 401:
                         completion(.failure(.Unauthorized))
-                        appPrint("Unauthorized")
+                        CommonUtility.shared.appPrint("Unauthorized")
                     case 403:
                         completion(.failure(.Forbidden))
-                        appPrint("Forbidden")
+                        CommonUtility.shared.appPrint("Forbidden")
                     case 404:
                         completion(.failure(.NotFound))
-                        appPrint("Not Found")
+                        CommonUtility.shared.appPrint("Not Found")
                     case 500:
                         completion(.failure(.BadRequest))
-                        appPrint("Internal Server Error")
+                        CommonUtility.shared.appPrint("Internal Server Error")
                     default:
-                        appPrint("statusCode")
+                        CommonUtility.shared.appPrint("statusCode")
                     }
                 }
                 return completion(.failure(.NoData))
@@ -149,13 +172,12 @@ protocol ResponseHandlerDelegate {
 }
  
 class ResponseHandler: ResponseHandlerDelegate {
-    
     //    This method covert json response to Generic type, if decoding is success then return generic type otherwise return error
     func fetchModel<T: Codable>(type: T.Type, data: Data, completion: (Result<T, APIError>) -> Void) {
         let aResponse = try? JSONDecoder().decode(type.self, from: data)
-        appPrint("========================================= RESPONSE =========================================")
+        CommonUtility.shared.appPrint("========================================= RESPONSE =========================================")
         let json = try? JSONSerialization.jsonObject(with: data)
-        //        appPrint(json)
+        //        CommonUtility.shared.appPrint(json)
         if let myResponse = aResponse {
             return completion(.success(myResponse))
         } else {

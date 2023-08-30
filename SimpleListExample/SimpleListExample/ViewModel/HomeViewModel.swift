@@ -34,7 +34,7 @@ class HomeViewModel: ObservableObject {
                 case .success(let response):
                     self.peopleList.append(contentsOf: response)
                 case .failure(let failure):
-                    appPrint(failure.localizedDescription)
+                    CommonUtility.shared.appPrint(failure.localizedDescription)
                 }
             }
         }
@@ -51,7 +51,7 @@ class HomeViewModel: ObservableObject {
                 case .success(let response):
                     self.roomList.append(contentsOf: response)
                 case .failure(let failure):
-                    appPrint(failure.localizedDescription)
+                    CommonUtility.shared.appPrint(failure.localizedDescription)
                 }
             }
         }
